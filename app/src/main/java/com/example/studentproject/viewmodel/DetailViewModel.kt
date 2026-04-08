@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.studentproject.model.Student
 
@@ -18,6 +20,10 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
             "http://dummyimage.com/75x100.jpg/cc0000/ffffff")*/
         queue = Volley.newRequestQueue(getApplication())
         val url = "https://www.jsonkeeper.com/b/LLMW"
+
+        val stringRequest = StringRequest(Request.Method.GET, url, {}, {})
+        stringRequest.tag = TAG
+        queue?.add(stringRequest)
 
         studentLD.value = student
     }
